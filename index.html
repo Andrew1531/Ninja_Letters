@@ -57,13 +57,13 @@
     100% { transform: scale(0) rotate(360deg); opacity: 0; }
   }
 
-  /* City Stack */
   #city {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-end;
     height: 200px;
     margin-top: 20px;
+    flex-wrap: wrap;
   }
 
   .city-block {
@@ -85,13 +85,12 @@
 
 <h1>🥷 Ninja Word Builder Dojo 🥷</h1>
 <div id="scoreboard">Score: 0</div>
-<p>Click letters to spell words! Watch your city grow.</p>
+<p>Click letters in order to spell words! Watch your city grow.</p>
 
 <div class="dojo-container" id="alphabet-grid"></div>
 <div id="city"></div>
 
 <script>
-// Words at roughly 3rd grade level
 const words = ["CAT", "DOG", "FARM", "TREE", "HOUSE", "BOOK", "SHIP", "STAR", "GAME", "MOON"];
 let currentWord = words[Math.floor(Math.random() * words.length)];
 let currentIndex = 0;
@@ -100,43 +99,42 @@ let score = 0;
 const grid = document.getElementById('alphabet-grid');
 const city = document.getElementById('city');
 
-function spawnLetter() {
-    // Random letter
-    const letter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[Math.floor(Math.random() * 26)];
+// Clear all letters
+function clearGrid() {
+    while(grid.firstChild) grid.removeChild(grid.firstChild);
+}
+
+// Spawn the **next letter in the word**
+function spawnNextLetter() {
+    clearGrid();
+    if(currentIndex >= currentWord.length) return;
+
+    const letter = currentWord[currentIndex];
     const card = document.createElement('div');
     card.className = 'letter-card';
     card.innerText = letter;
 
-    // Random position
     card.style.top = Math.random() * (grid.offsetHeight - 60) + 'px';
     card.style.left = Math.random() * (grid.offsetWidth - 60) + 'px';
 
     card.onclick = () => {
         speakLetter(letter);
-        if(letter === currentWord[currentIndex]) {
-            currentIndex++;
-            score += 5;
-            updateScore();
-            card.classList.add('hit');
-
-            // Add to city when word is complete
+        currentIndex++;
+        score += 5;
+        updateScore();
+        card.classList.add('hit');
+        setTimeout(() => {
+            if(grid.contains(card)) grid.removeChild(card);
             if(currentIndex === currentWord.length) {
                 addWordToCity(currentWord);
                 currentWord = words[Math.floor(Math.random() * words.length)];
                 currentIndex = 0;
             }
-
-            setTimeout(() => {
-                if(grid.contains(card)) grid.removeChild(card);
-            }, 300);
-        }
+            spawnNextLetter();
+        }, 300);
     };
 
     grid.appendChild(card);
-
-    setTimeout(() => {
-        if(grid.contains(card)) grid.removeChild(card);
-    }, 5000);
 }
 
 function updateScore() {
@@ -158,8 +156,8 @@ function addWordToCity(word) {
     }
 }
 
-// Spawn letters every 1.5 seconds
-setInterval(spawnLetter, 1500);
+// Start the first letter
+spawnNextLetter();
 </script>
 
 </body>
