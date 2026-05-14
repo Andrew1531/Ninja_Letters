@@ -113,13 +113,13 @@
         </p>
     </header>
 
-    <div id="ninja-follower" class="ninja-container mb-8 ninja-bounce cursor-pointer relative" onclick="ninjaJump()">
-        <svg width="180" height="180" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <rect x="25" y="30" width="50" height="50" rx="10" fill="#2d3436" />
-            <rect x="25" y="40" width="50" height="12" fill="#d63031" />
-            <rect x="35" y="42" width="30" height="8" fill="#f1f2f6" rx="2" />
-            <circle id="left-eye" cx="42" cy="46" r="2.5" fill="#000" />
-            <circle id="right-eye" cx="58" cy="46" r="2.5" fill="#000" />
+    <div class="flex flex-col items-center gap-6 mb-8">
+        <!-- HERO PHOTO PLACEHOLDER: Put a picture of Mateo here! -->
+        <div class="w-32 h-32 md:w-48 md:h-48 border-8 border-white rounded-2xl overflow-hidden shadow-2xl rotate-3 bg-gray-200">
+            <img src="https://placehold.co/400x400/2d3436/white?text=MATEO+PHOTO" alt="Mateo Ninja" class="w-full h-full object-cover">
+        </div>
+
+        <div id="ninja-follower" class="ninja-container ninja-bounce cursor-pointer relative" onclick="ninjaJump()">
             <circle cx="22" cy="65" r="6" fill="#2d3436" />
             <circle cx="78" cy="65" r="6" fill="#2d3436" />
             <rect x="30" y="80" width="15" height="8" rx="4" fill="#2d3436" />
@@ -131,43 +131,107 @@
     </div>
 
     <main class="w-full max-w-2xl">
-        <div class="floating-card p-6 mb-8 text-center">
-            <h2 class="minecraft-font text-xl mb-6 text-gray-800">NINJA TRAINING</h2>
+        <div class="space-y-8">
+            <h2 class="minecraft-font text-2xl text-white text-center mb-6">NINJA MISSION LOG</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <a href="ninja-strike.html" onclick="handleTrainingClick(event, 'NINJA STRIKE!')" class="btn-pixel p-4 rounded text-white minecraft-font text-[10px] flex items-center justify-center gap-2 no-underline">
-                    <span>⚔️</span> STRIKE
-                </a>
-                <a href="power-kick.html" onclick="handleTrainingClick(event, 'POWER KICK!')" class="btn-pixel p-4 rounded text-white minecraft-font text-[10px] flex items-center justify-center gap-2 bg-blue-500 border-blue-700 no-underline">
-                    <span>🥋</span> KICK
-                </a>
-                <a href="smoke-bomb.html" onclick="handleTrainingClick(event, 'SMOKE BOMB!')" class="btn-pixel p-4 rounded text-white minecraft-font text-[10px] flex items-center justify-center gap-2 bg-green-500 border-green-700 no-underline">
-                    <span>🌫️</span> SMOKE
-                </a>
-                <a href="pizza-break.html" onclick="handleTrainingClick(event, 'PIZZA TIME!')" class="btn-pixel p-4 rounded text-white minecraft-font text-[10px] flex items-center justify-center gap-2 bg-orange-500 border-orange-700 no-underline">
-                    <span>🍕</span> PIZZA
-                </a>
+            <!-- MISSION CARD 1 -->
+            <div class="floating-card p-4 flex flex-col md:flex-row gap-6 items-center">
+                <div class="w-full md:w-1/2 aspect-square border-4 border-black rounded-lg overflow-hidden bg-gray-100">
+                    <img src="https://placehold.co/400x400/e74c3c/white?text=MISSION+PHOTO+1" alt="Mateo Mission 1" class="w-full h-full object-cover">
+                </div>
+                <div class="w-full md:w-1/2">
+                    <span class="bg-red-500 text-white px-2 py-1 minecraft-font text-[8px] rounded">MISSION: STRIKE</span>
+                    <p class="mt-4 font-bold text-gray-800 text-lg leading-tight">
+                        "Mateo mastered the legendary Shadow Strike today! He is too fast for the cameras to even see!"
+                    </p>
+                </div>
+            </div>
+
+            <!-- MISSION CARD 2 -->
+            <div class="floating-card p-4 flex flex-col md:flex-row-reverse gap-6 items-center border-blue-500">
+                <div class="w-full md:w-1/2 aspect-square border-4 border-black rounded-lg overflow-hidden bg-gray-100">
+                    <img src="https://placehold.co/400x400/3498db/white?text=MISSION+PHOTO+2" alt="Mateo Mission 2" class="w-full h-full object-cover">
+                </div>
+                <div class="w-full md:w-1/2 text-right md:text-left">
+                    <span class="bg-blue-500 text-white px-2 py-1 minecraft-font text-[8px] rounded">MISSION: POWER KICK</span>
+                    <p class="mt-4 font-bold text-gray-800 text-lg leading-tight">
+                        "One kick and the practice dummies flew across the room. Level 5 strength achieved!"
+                    </p>
+                </div>
+            </div>
+
+            <!-- MISSION CARD 3 -->
+            <div class="floating-card p-4 flex flex-col md:flex-row gap-6 items-center border-green-500">
+                <div class="w-full md:w-1/2 aspect-square border-4 border-black rounded-lg overflow-hidden bg-gray-100">
+                    <img src="https://placehold.co/400x400/2ecc71/white?text=MISSION+PHOTO+3" alt="Mateo Mission 3" class="w-full h-full object-cover">
+                </div>
+                <div class="w-full md:w-1/2">
+                    <span class="bg-green-500 text-white px-2 py-1 minecraft-font text-[8px] rounded">MISSION: STEALTH</span>
+                    <p class="mt-4 font-bold text-gray-800 text-lg leading-tight">
+                        "Sneaking around to get the last slice of pizza. A true ninja never leaves a crumb behind."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="w-full mt-20 bg-black/90 border-t-8 border-yellow-400 p-8 md:p-12 text-white">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+            
+            <!-- Column 1: Ninja Motto -->
+            <div class="space-y-4">
+                <h3 class="minecraft-font text-yellow-400 text-lg">NINJA MOTTO</h3>
+                <p class="text-gray-300 italic leading-relaxed">
+                    "Train hard, play harder, and never forget to share the pizza. A true ninja is kind, brave, and always ready for adventure!"
+                </p>
+                <div class="flex gap-4">
+                    <span class="w-8 h-8 bg-red-500 rounded flex items-center justify-center font-bold">M</span>
+                    <span class="w-8 h-8 bg-blue-500 rounded flex items-center justify-center font-bold">A</span>
+                    <span class="w-8 h-8 bg-green-500 rounded flex items-center justify-center font-bold">T</span>
+                </div>
+            </div>
+
+            <!-- Column 2: Quick Stats -->
+            <div class="space-y-4">
+                <h3 class="minecraft-font text-blue-400 text-lg">MISSION HQ</h3>
+                <ul class="space-y-2 text-gray-300">
+                    <li class="flex items-center gap-2">
+                        <span class="text-yellow-400">★</span> Level 5 Ninja Rank
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-yellow-400">★</span> Mastery in Stealth
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-yellow-400">★</span> Chief Pizza Inspector
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Contact/Credits -->
+            <div class="space-y-4">
+                <h3 class="minecraft-font text-green-400 text-lg">CREDITS</h3>
+                <p class="text-gray-400 text-sm">
+                    This secret ninja scroll was hand-crafted with ❤️ for Mateo's 5th Birthday.
+                </p>
+                <div class="bg-white/10 p-4 rounded-lg border border-white/20">
+                    <p class="text-xs uppercase tracking-widest text-gray-400">Status:</p>
+                    <p class="text-green-400 font-bold animate-pulse">ACTIVE MISSION</p>
+                </div>
             </div>
         </div>
 
-        <div class="w-full bg-black/20 h-8 rounded-full border-4 border-black overflow-hidden mb-4">
-            <div id="xp-bar" class="h-full bg-green-400 w-1/4 transition-all duration-500"></div>
+        <!-- Bottom Copyright -->
+        <div class="mt-12 pt-8 border-t border-white/10 text-center">
+            <p class="minecraft-font text-[10px] text-gray-500">
+                &copy; 2024 MATEO NINJA WORLD | NO UNAUTHORIZED STEALTH ALLOWED
+            </p>
         </div>
-        <p class="text-center minecraft-font text-white text-[10px]">XP TO NEXT LEVEL: <span id="xp-text">25</span>/100</p>
-    </main>
-
-    <footer class="mt-auto py-8 text-white/80 font-bold text-center">
-        <p>MADE FOR THE COOLEST NINJA EVER</p>
     </footer>
 
     <script>
         const ninja = document.getElementById('ninja-follower');
         const bubble = document.getElementById('bubble');
-        const xpBar = document.getElementById('xp-bar');
-        const xpText = document.getElementById('xp-text');
         
-        let currentXP = 25;
-
         // Ninja Jump Animation
         function ninjaJump() {
             ninja.classList.remove('ninja-bounce');
@@ -192,46 +256,27 @@
             }, 1500);
         }
 
-        // Handle Training Link Clicks
-        function handleTrainingClick(event, msg) {
-            event.preventDefault();
-            const targetUrl = event.currentTarget.getAttribute('href');
-            
-            showBubble(msg);
-            
-            // Level up logic
-            currentXP += 20;
-            if (currentXP > 100) currentXP = 100;
-            xpBar.style.width = currentXP + '%';
-            xpText.innerText = currentXP;
-            
-            // Spin animation
-            ninja.classList.remove('ninja-bounce');
-            ninja.style.transform = 'rotate(360deg) scale(1.2)';
-            
-            // Navigate after animation
-            setTimeout(() => {
-                window.location.href = targetUrl;
-            }, 800);
-        }
-
+        // Eye Tracking Logic
         document.addEventListener('mousemove', (e) => {
-            const leftEye = document.getElementById('left-eye');
-            const rightEye = document.getElementById('right-eye');
+            const eyes = [document.getElementById('left-eye'), document.getElementById('right-eye')];
             
-            [leftEye, rightEye].forEach(eye => {
+            eyes.forEach(eye => {
+                if (!eye) return;
                 const rect = eye.getBoundingClientRect();
                 const x = rect.left + rect.width / 2;
                 const y = rect.top + rect.height / 2;
-                const rad = Math.atan2(e.pageX - x, e.pageY - y);
-                const rot = (rad * (180 / Math.PI) * -1) + 180;
+                const angle = Math.atan2(e.clientX - x, e.clientY - y);
                 
-                // Move pupil slightly towards mouse
-                const moveX = Math.sin(rad) * 2;
-                const moveY = Math.cos(rad) * 2;
+                const moveX = Math.sin(angle) * 3;
+                const moveY = Math.cos(angle) * 3;
                 eye.style.transform = `translate(${moveX}px, ${moveY}px)`;
             });
         });
+
+        // Initialize bounce on load
+        window.onload = () => {
+            ninja.classList.add('ninja-bounce');
+        };
     </script>
 </body>
 </html>
