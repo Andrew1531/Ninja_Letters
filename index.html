@@ -1,20 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Mateo's Gamified Ninja English Learning Website"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <title>Mateo's Ninja English Academy</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div> <!-- This is where your React app gets mounted -->
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATEO'S NINJA WORLD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pixel-size: 20px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+            background-color: #87CEEB;
+        }
+
+        .pixel-rainbow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                linear-gradient(to bottom, 
+                    #ff4d4d 0%, #ff4d4d 14%, 
+                    #ffa333 14%, #ffa333 28%, 
+                    #ffff4d 28%, #ffff4d 42%, 
+                    #4dff4d 42%, #4dff4d 56%, 
+                    #4d94ff 56%, #4d94ff 70%, 
+                    #944dff 70%, #944dff 84%, 
+                    #ff4dff 84%, #ff4dff 100%
+                );
+            background-size: 100% 700%;
+            animation: rainbowScroll 20s linear infinite;
+            opacity: 0.6;
+            image-rendering: pixelated;
+        }
+
+        .pixel-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: 
+                linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+            background-size: var(--pixel-size) var(--pixel-size);
+        }
+
+        @keyframes rainbowScroll {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 0% 100%; }
+        }
+
+        .minecraft-font {
+            font-family: 'Press Start 2P', cursive;
+            text-shadow: 4px 4px 0px #000;
+        }
+
+        .ninja-container {
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
+        }
+
+        .ninja-bounce {
+            animation: bounce 2s infinite ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 6px solid #000;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.2);
+            border-radius: 12px;
+        }
+
+        .btn-pixel {
+            background: #e74c3c;
+            border-bottom: 6px solid #c0392b;
+            transition: all 0.1s;
+            cursor: pointer;
+        }
+
+        .btn-pixel:active {
+            border-bottom: 0px solid #c0392b;
+            transform: translateY(6px);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-start p-4 md:p-10">
+
+    <div class="pixel-rainbow"></div>
+    <div class="pixel-grid"></div>
+
+    <header class="text-center mb-12">
+        <h1 class="minecraft-font text-white text-4xl md:text-6xl mb-4 tracking-tighter">
+            MATEO
+        </h1>
+        <p class="minecraft-font text-yellow-300 text-sm md:text-lg animate-pulse">
+            LEVEL 5 NINJA MASTER
+        </p>
+    </header>
+
+    <div id="ninja-follower" class="ninja-container mb-8 ninja-bounce cursor-pointer relative" onclick="ninjaJump()">
+        <svg width="180" height="180" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="25" y="30" width="50" height="50" rx="10" fill="#2d3436" />
+            <rect x="25" y="40" width="50" height="12" fill="#d63031" />
+            <rect x="35" y="42" width="30" height="8" fill="#f1f2f6" rx="2" />
+            <circle id="left-eye" cx="42" cy="46" r="2.5" fill="#000" />
+            <circle id="right-eye" cx="58" cy="46" r="2.5" fill="#000" />
+            <circle cx="22" cy="65" r="6" fill="#2d3436" />
+            <circle cx="78" cy="65" r="6" fill="#2d3436" />
+            <rect x="30" y="80" width="15" height="8" rx="4" fill="#2d3436" />
+            <rect x="55" y="80" width="15" height="8" rx="4" fill="#2d3436" />
+        </svg>
+        <div id="bubble" class="absolute -top-12 left-1/2 -translate-x-1/2 bg-white px-4 py-2 rounded-full font-bold text-gray-800 border-2 border-black opacity-0 transition-all pointer-events-none whitespace-nowrap">
+            HI MATEO!
+        </div>
+    </div>
+
+    <main class="w-full max-w-2xl">
+        <div class="floating-card p-6 mb-8 text-center">
+            <h2 class="minecraft-font text-xl mb-6 text-gray-800">NINJA TRAINING</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <a href="ninja-strike.html" onclick="handleTrainingClick(event, 'NINJA STRIKE!')" class="btn-pixel p-4 rounded text-white minecraft-font text-[10px] flex items-center justify-center gap-2 no-underline">
+                    <span>⚔️</span> STRIKE
+                </a>
+                <a href="power-kick.html" onclick="handleTrainingClick(event, 'POWER KICK!')" class="btn-pixel p-4 rounded text-white minecraft-font text-[10px] flex items-center justify-center gap-2 bg-blue-500 border-blue-700 no-underline">
+                    <span>🥋</span> KICK
+                </a>
+                <a href="smoke-bomb.html" onclick="handleTrainingClick(event, 'SMOKE BOMB!')" class="btn-pixel p-4 rounded text-white minecraft-font text-[10px] flex items-center justify-center gap-2 bg-green-500 border-green-700 no-underline">
+                    <span>🌫️</span> SMOKE
+                </a>
+                <a href="pizza-break.html" onclick="handleTrainingClick(event, 'PIZZA TIME!')" class="btn-pixel p-4 rounded text-white minecraft-font text-[10px] flex items-center justify-center gap-2 bg-orange-500 border-orange-700 no-underline">
+                    <span>🍕</span> PIZZA
+                </a>
+            </div>
+        </div>
+
+        <div class="w-full bg-black/20 h-8 rounded-full border-4 border-black overflow-hidden mb-4">
+            <div id="xp-bar" class="h-full bg-green-400 w-1/4 transition-all duration-500"></div>
+        </div>
+        <p class="text-center minecraft-font text-white text-[10px]">XP TO NEXT LEVEL: <span id="xp-text">25</span>/100</p>
+    </main>
+
+    <footer class="mt-auto py-8 text-white/80 font-bold text-center">
+        <p>MADE FOR THE COOLEST NINJA EVER</p>
+    </footer>
+
+    <script>
+        const ninja = document.getElementById('ninja-follower');
+        const bubble = document.getElementById('bubble');
+        const xpBar = document.getElementById('xp-bar');
+        const xpText = document.getElementById('xp-text');
+        
+        let currentXP = 25;
+
+        // Ninja Jump Animation
+        function ninjaJump() {
+            ninja.classList.remove('ninja-bounce');
+            ninja.style.transform = 'translateY(-60px) scale(1.1)';
+            showBubble("HI-YAH!");
+            
+            setTimeout(() => {
+                ninja.style.transform = 'translateY(0) scale(1)';
+                setTimeout(() => ninja.classList.add('ninja-bounce'), 200);
+            }, 300);
+        }
+
+        // Show Speech Bubble
+        function showBubble(text) {
+            bubble.innerText = text;
+            bubble.style.opacity = '1';
+            bubble.style.transform = 'translateX(-50%) translateY(-10px)';
+            
+            setTimeout(() => {
+                bubble.style.opacity = '0';
+                bubble.style.transform = 'translateX(-50%) translateY(0)';
+            }, 1500);
+        }
+
+        // Handle Training Link Clicks
+        function handleTrainingClick(event, msg) {
+            event.preventDefault();
+            const targetUrl = event.currentTarget.getAttribute('href');
+            
+            showBubble(msg);
+            
+            // Level up logic
+            currentXP += 20;
+            if (currentXP > 100) currentXP = 100;
+            xpBar.style.width = currentXP + '%';
+            xpText.innerText = currentXP;
+            
+            // Spin animation
+            ninja.classList.remove('ninja-bounce');
+            ninja.style.transform = 'rotate(360deg) scale(1.2)';
+            
+            // Navigate after animation
+            setTimeout(() => {
+                window.location.href = targetUrl;
+            }, 800);
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            const leftEye = document.getElementById('left-eye');
+            const rightEye = document.getElementById('right-eye');
+            
+            [leftEye, rightEye].forEach(eye => {
+                const rect = eye.getBoundingClientRect();
+                const x = rect.left + rect.width / 2;
+                const y = rect.top + rect.height / 2;
+                const rad = Math.atan2(e.pageX - x, e.pageY - y);
+                const rot = (rad * (180 / Math.PI) * -1) + 180;
+                
+                // Move pupil slightly towards mouse
+                const moveX = Math.sin(rad) * 2;
+                const moveY = Math.cos(rad) * 2;
+                eye.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            });
+        });
+    </script>
+</body>
 </html>
